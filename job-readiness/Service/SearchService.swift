@@ -29,7 +29,7 @@ class SearchService {
     }
     
     func getProductsIDs(token: String, categoryID: String, completion: @escaping (ProductByCategoryResponse?) -> Void) {
-        let urlExtension = "/highlights/MLB/category/\(categoryID)"
+        let urlExtension = "highlights/MLB/category/\(categoryID)"
         
         apiClient.get(token: token, urlExtension: urlExtension) { data, error in
             do {
@@ -42,7 +42,7 @@ class SearchService {
     }
     
     func getProducts(token: String, itemsIds: [String], completion: @escaping (ProductResponse?) -> Void) {
-        let urlExtension = " "
+        let urlExtension = "items"
         
         let params = [
             "ids" : itemsIds.joined(separator: ",")
