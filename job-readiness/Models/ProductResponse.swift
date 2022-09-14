@@ -8,13 +8,20 @@
 import Foundation
 
 // MARK: - ProductResponse
-struct ProductResponse: Codable {
+struct ProductResponse: Codable, Hashable {
     let code: Int?
     let body: Body?
+    
+    static func == (lhs: ProductResponse, rhs: ProductResponse) -> Bool { lhs.body?.id == rhs.body?.id }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(body?.id)
+    }
 }
 
 // MARK: - Body
 struct Body: Codable {
+    let id: String?
     let title: String?
     let officialStoreID: Int?
     let price: Double?

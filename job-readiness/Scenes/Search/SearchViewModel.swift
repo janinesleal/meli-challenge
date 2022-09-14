@@ -62,10 +62,11 @@ class SearchViewModel {
         guard let categoryID = categoryID else { return }
 
         service.getProductsIDs(token: authToken, categoryID: categoryID) { response in
-            if let response = response?.content {
-                for content in response {
-                    guard let id = content.id else { return }
+            if let content = response?.content {
+                for product in content {
+                    guard let id = product.id else { return }
                     self.productsIDList.append(id)
+                    
                 }
                 self.getProducts()
             } else {
@@ -77,12 +78,14 @@ class SearchViewModel {
     
     func getProducts() {
         guard let authToken = authToken else { return }
-        
+        print(self.productsIDList)
         service.getProducts(token: authToken, itemsIds: productsIDList) { response in
             if let products = response {
                 for product in products {
                     self.productsList.append(product)
+                    print(product.body?.title)
                 }
+                
                 self.delegate?.updateTableView()
             } else {
                 //token inválido - stautus 401

@@ -20,6 +20,7 @@ class SearchViewController: UIViewController {
         setTableView()
         setUpUI()
         viewModel.fetchToken()
+        viewModel.delegate = self
     }
     
     private func setTableView() {
@@ -45,7 +46,7 @@ class SearchViewController: UIViewController {
         //        searchTextfield.rightViewMode = .always
     }
     
-    @IBAction func test(_ sender: Any) {
+    @IBAction func searchCategory(_ sender: Any) {
         guard let category = searchTextfield.text else { return }
         
         viewModel.getCategoryId(category: category)
@@ -72,9 +73,7 @@ extension SearchViewController: UITableViewDataSource {
         
         let list = viewModel.productsList
         
-        for product in list {
-            cell.setCell(title: product.body?.title ?? "deu ruim", price: "\(product.body?.price ?? 0)")
-        }
+        cell.setCell(title: list[indexPath.row].body?.title ?? "deu ruim", price: "\(list[indexPath.row].body?.price ?? 0)")
         
         return cell
     }
