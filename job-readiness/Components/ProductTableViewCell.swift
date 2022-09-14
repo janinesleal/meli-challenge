@@ -23,10 +23,10 @@ class ProductTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCell(title: String, value: String) {
+    func setCell(title: String, price: String) {
         //TODO: SETAR IMAGEM
         objectTitleLabel.text = title
-        let fullPrice = "R$\(value)" // fazer extensão
+        let fullPrice = "R$\(price)" // fazer extensão
         objectValueLabel.text = fullPrice
     }
 }

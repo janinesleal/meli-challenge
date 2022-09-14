@@ -28,12 +28,24 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOZ-qP-TYt">
+                                        <rect key="frame" x="278" y="117" width="67" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                        <connections>
+                                            <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zQB-LJ-F2k"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99215686274509807" green="0.94509803921568625" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="pOZ-qP-TYt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QuS-TP-XGF" secondAttribute="leading" constant="20" symbolic="YES" id="5NJ-Al-Re1"/>
                                     <constraint firstItem="EV7-OD-LpZ" firstAttribute="leading" secondItem="QuS-TP-XGF" secondAttribute="leading" constant="30" id="71p-we-WOc"/>
+                                    <constraint firstAttribute="trailing" secondItem="pOZ-qP-TYt" secondAttribute="trailing" constant="30" id="Mpg-sO-vLW"/>
                                     <constraint firstAttribute="trailing" secondItem="EV7-OD-LpZ" secondAttribute="trailing" constant="30" id="XcU-Hx-l5R"/>
                                     <constraint firstItem="EV7-OD-LpZ" firstAttribute="top" secondItem="QuS-TP-XGF" secondAttribute="top" constant="96" id="hgf-Ss-0zs"/>
+                                    <constraint firstItem="pOZ-qP-TYt" firstAttribute="top" secondItem="QuS-TP-XGF" secondAttribute="top" constant="117" id="jbg-oN-Yc1"/>
+                                    <constraint firstAttribute="bottom" secondItem="pOZ-qP-TYt" secondAttribute="bottom" constant="8" id="mrF-P8-dPb"/>
                                     <constraint firstAttribute="bottom" secondItem="EV7-OD-LpZ" secondAttribute="bottom" constant="20" symbolic="YES" id="v0c-AA-n5f"/>
                                 </constraints>
                             </view>

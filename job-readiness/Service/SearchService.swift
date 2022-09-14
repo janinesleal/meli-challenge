@@ -41,7 +41,7 @@ class SearchService {
         }
     }
     
-    func getProducts(token: String, itemsIds: [String], completion: @escaping (ProductResponse?) -> Void) {
+    func getProducts(token: String, itemsIds: [String], completion: @escaping ([ProductResponse]?) -> Void) {
         let urlExtension = "items"
         
         let params = [
@@ -50,7 +50,7 @@ class SearchService {
         
         apiClient.get(token: token, parameters: params, urlExtension: urlExtension) { data, error in
             do {
-                let response = try JSONDecoder().decode(ProductResponse.self, from: data)
+                let response = try JSONDecoder().decode([ProductResponse].self, from: data)
                 completion(response)
             } catch let error {
                 print("error: \(error)")
