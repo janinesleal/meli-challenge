@@ -7,7 +7,7 @@
 
 import Foundation
 // MARK: - ProductByCategory
-struct ProductByCategory: Codable {
+struct ProductByCategoryResponse: Codable {
     let query_data: QueryData?
     let content: [Content]?
     let error: String?

@@ -43,6 +43,30 @@ class APIClient {
         task.resume()
     }
     
+    func get(token: String, urlExtension: String, then handler: @escaping (Data, Error?) -> Void) {
+        guard let url = URL(string: baseURL + urlExtension) else { return }
+    
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let task =  urlSession.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                print("Error: error calling POST")
+                print(error!)
+                return
+            }
+            
+            guard let data = data else {
+                print("Error: Did not receive data")
+                return
+            }
+            
+            handler(data, error)
+        }
+        
+        task.resume()
+    }
+    
     func get(parameters: [String: String], urlExtension: String, then handler: @escaping (Data, Error?) -> Void) {
         let url = baseURL + urlExtension
         
@@ -82,7 +106,7 @@ class APIClient {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HttpMethods.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
         

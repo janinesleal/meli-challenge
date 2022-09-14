@@ -10,8 +10,7 @@ import Foundation
 class SearchService {
     let apiClient = APIClient()
     
-    func getCategoryId(category: String, completion: @escaping (CategoryResponse?) -> ()) {
-        //NÃO TEM TOKEN
+    func getCategoryId(category: String, completion: @escaping (CategoryResponse?) -> Void) {
         let params = [
             "limit" : "1",
             "q" : category
@@ -29,8 +28,16 @@ class SearchService {
         }
     }
     
-    func getProductsIDs(token: String) {
-        apiClient.get(token: token, parameters: <#T##[String : String]#>, urlExtension: <#T##String#>, then: <#T##(Data, Error?) -> Void#>)
+    func getProductsIDs(token: String, categoryID: String, completion: @escaping (ProductByCategoryResponse?) -> Void) {
+        let urlExtension = "/highlights/MLM/category/\(categoryID)"
+        
+        apiClient.get(token: token, urlExtension: urlExtension) { data, error in
+            do {
+                let response = try JSONDecoder().decode(ProductByCategoryResponse.self, from: data)
+                completion(response)
+            } catch let error {
+                print("error: \(error)")
+            }
+        }
     }
-    //pegar produtos por cateegoria tem token
 }

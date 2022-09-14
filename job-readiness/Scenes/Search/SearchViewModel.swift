@@ -21,7 +21,7 @@ protocol SearchViewModelProtocol {
 class SearchViewModel: SearchViewModelProtocol {
     var certificateService: CertificateService
     var service: SearchService
-    private var token: String? //Não sei onde salvar
+    private var authToken: String? //Não sei onde salvar
     private var categoryID: String?
     
     init(certificateService: CertificateService, service: SearchService) {
@@ -32,8 +32,7 @@ class SearchViewModel: SearchViewModelProtocol {
     func fetchToken() {
         certificateService.getToken { response in
             if let response = response?.access_token {
-                self.token = response
-                print(self.token)
+                self.authToken = response
             } else {
                 print(response?.error)
                 //TODO: queria que fosse um observável pra daí enviar um status e mostrar o alert - checar amanhã com glauco
@@ -52,6 +51,12 @@ class SearchViewModel: SearchViewModelProtocol {
     }
     
     func getProductsByID() {
-        
+        service.getProductsIDs(token: authToken, categoryID: categoryID) { response in
+            if let response = response?.content != nil {
+                <#body#>
+            } else {
+                //TODO: mostrar modal de token inválido
+            }
+        }
     }
 }
