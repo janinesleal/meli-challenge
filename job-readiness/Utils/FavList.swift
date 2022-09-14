@@ -8,5 +8,5 @@
 import Foundation
 
 struct FavList {
-    static var favList: Set<ProductResponse> = []
+    static var list: Set<ProductResponse> = []
 }

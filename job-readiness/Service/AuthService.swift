@@ -16,7 +16,7 @@ class AuthService {
             "client_id" : "1642844960422361",
             "redirect_uri" : "https://www.alkemy.org/",
             "client_secret" : "1EGYKZqkfj6LDjc01TLH39c6cah11cns",
-            "code" : "TG-6322281150f85d0001e9bb07-126446547",
+            "code" : "TG-632240ebb240180001097fd7-126446547",
             "grant_type" : "authorization_code"
         ]
         

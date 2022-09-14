@@ -18,7 +18,6 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         setTableView()
-        setUpUI()
         viewModel.fetchToken()
         viewModel.delegate = self
     }
@@ -27,23 +26,6 @@ class SearchViewController: UIViewController {
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
         resultsTableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "productCell")
-    }
-    
-    private func setUpUI() {
-        //        let searchBtn = UIButton(type: .custom)
-        //        searchBtn.addTarget(self, action: #selector(self.searchCategory), for: .touchUpInside)
-        //        searchBtn.frame = CGRect(x: CGFloat(searchTextfield.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
-        //        searchBtn.setImage(UIImage(systemName: "search"), for: .normal)
-        //
-        //        let button = UIButton(type: .custom)
-        //        button.setImage(UIImage(systemName: "search"), for: .normal)
-        //        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-        //        button.frame = CGRect(x: CGFloat(searchTextfield.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
-        //        button.addTarget(self, action: #selector(self.searchCategory), for: .touchUpInside)
-        //
-        //        searchTextfield.addSubview(searchBtn)
-        //        searchTextfield.rightView = button
-        //        searchTextfield.rightViewMode = .always
     }
     
     @IBAction func searchCategory(_ sender: Any) {
@@ -55,11 +37,14 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        if let list = viewModel?.categoriesList {
-        //            selectedType = list[indexPath.row]
-        //            pushToSuggestionPage()
-        //        }
-        print("Clicou")
+        let list = viewModel.productsList
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailsSB") as? DetailsViewController else { return }
+        
+        viewController.product = list[indexPath.row]
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

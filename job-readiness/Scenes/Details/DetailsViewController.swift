@@ -21,21 +21,31 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
     }
-    //o controle da imagem vai ser feito por estar ou nao no userDefaults
-    
+
     private func setUpUI() {
-        favButton.setImage(UIImage(systemName: "heart"), for: .normal)
         objectTitleLabel.text = product?.body?.title
         objectValueLabel.text = "\(product?.body?.price ?? 0)"
+        checkIsFav()
+    }
     
+    func checkIsFav() {
+        let isFav = FavList.list.contains { productList in
+            self.product?.body?.id == productList.body?.id
+        }
+        
+        isFav ? favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : favButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     
 
     @IBAction func setAsFav(_ sender: Any) {
         let defaults = UserDefaults.standard
-//        if vehicles.insert(vehicle).inserted
-        defaults.set(product, forKey: <#T##String#>)
+        guard let product = product else { return }
+        
+        if FavList.list.insert(product).inserted {
+            if let encoded = try? JSONEncoder().encode(product) {
+                defaults.set(encoded, forKey: "FavList")
+            }
+            favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
     }
-    
-
 }

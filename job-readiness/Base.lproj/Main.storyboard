@@ -82,7 +82,7 @@
         <!--Details View Controller-->
         <scene sceneID="Wzm-5i-MlC">
             <objects>
-                <viewController id="6Me-hK-bcZ" customClass="DetailsViewController" customModule="job_readiness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsSB" id="6Me-hK-bcZ" customClass="DetailsViewController" customModule="job_readiness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VCC-CX-7v4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
