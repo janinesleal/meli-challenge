@@ -10,7 +10,7 @@ import Foundation
 struct ProductByCategoryResponse: Codable {
     let query_data: QueryData?
     let content: [Content]?
-    let error: String?
+    let status: Int?
 }
 
 // MARK: - Content

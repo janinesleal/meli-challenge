@@ -72,4 +72,17 @@ extension SearchViewController: SearchViewModelDelegate {
             resultsTableView.reloadData()
         }
     }
+    
+    func setViewState(state: SearchViewState) {
+        DispatchQueue.main.async {
+            switch state {
+            case .isLoading:
+                print("Is loading")
+            case .TokenError:
+                print("Token inválido")
+            case .Error:
+                print("Categoria não encontrada")
+            }
+        }
+    }
 }

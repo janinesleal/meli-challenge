@@ -8,6 +8,7 @@
 import Foundation
 
 protocol SearchViewModelDelegate {
+    func setViewState(state: SearchViewState)
     func updateTableView()
 }
 
@@ -26,8 +27,7 @@ class SearchViewModel {
             if let response = response?.access_token {
                 self.authToken = response
             } else {
-                print(response?.error)
-                //TODO: queria que fosse um observável pra daí enviar um status e mostrar o alert - checar amanhã com glauco - status 400
+                self.delegate?.setViewState(state: .TokenError)
             }
         }
     }
@@ -55,8 +55,16 @@ class SearchViewModel {
                 }
                 self.getProducts()
             } else {
-                //TODO: mostrar modal de token inválido - status 401
-                //TODO: erro de categoria inválida - status 404
+                if let error = response?.status {
+                    switch error {
+                    case 401:
+                        self.delegate?.setViewState(state: .TokenError)
+                    case 404:
+                        self.delegate?.setViewState(state: .Error)
+                    default:
+                        return
+                    }
+                }
             }
         }
     }
@@ -71,8 +79,12 @@ class SearchViewModel {
                 }
                 self.delegate?.updateTableView()
             } else {
-                //token inválido - stautus 401
+                self.delegate?.setViewState(state: .TokenError)
             }
         }
     }
+}
+
+enum SearchViewState {
+    case isLoading, TokenError, Error
 }
