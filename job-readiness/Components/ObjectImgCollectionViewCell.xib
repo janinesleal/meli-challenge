@@ -10,30 +10,50 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ObjectImgCollectionViewCell" customModule="job_readiness" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="283" height="183"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imgCell" id="gTV-IL-0wX" customClass="ObjectImgCollectionViewCell" customModule="job_readiness" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="297" height="183"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="283" height="183"/>
+                <rect key="frame" x="0.0" y="0.0" width="297" height="183"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7C-Jf-JbE">
-                        <rect key="frame" x="0.0" y="0.0" width="283" height="183"/>
+                        <rect key="frame" x="0.0" y="0.0" width="297" height="183"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rd1-29-qnZ">
+                                <rect key="frame" x="0.0" y="-1" width="297" height="184"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="183" id="WDC-pH-LIG"/>
+                                    <constraint firstAttribute="width" constant="297" id="faE-bq-niZ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rd1-29-qnZ" firstAttribute="top" secondItem="X7C-Jf-JbE" secondAttribute="top" id="7A0-pK-eO2"/>
+                            <constraint firstAttribute="trailing" secondItem="rd1-29-qnZ" secondAttribute="trailing" id="8ok-pt-wBI"/>
+                            <constraint firstAttribute="bottom" secondItem="rd1-29-qnZ" secondAttribute="bottom" id="FpW-72-9JB"/>
+                            <constraint firstItem="rd1-29-qnZ" firstAttribute="leading" secondItem="X7C-Jf-JbE" secondAttribute="leading" id="JiZ-8O-jGE"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="X7C-Jf-JbE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4aj-RA-ZSY"/>
-                <constraint firstAttribute="bottom" secondItem="X7C-Jf-JbE" secondAttribute="bottom" id="VUp-kp-aZC"/>
+                <constraint firstAttribute="trailing" secondItem="X7C-Jf-JbE" secondAttribute="trailing" id="6sC-bj-bll"/>
                 <constraint firstItem="X7C-Jf-JbE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jQP-KD-Syd"/>
-                <constraint firstAttribute="trailing" secondItem="X7C-Jf-JbE" secondAttribute="trailing" id="s6F-Xp-Aou"/>
+                <constraint firstAttribute="bottom" secondItem="X7C-Jf-JbE" secondAttribute="bottom" id="tFf-57-h1V"/>
             </constraints>
-            <point key="canvasLocation" x="131.15942028985509" y="125.55803571428571"/>
+            <size key="customSize" width="297" height="183"/>
+            <connections>
+                <outlet property="productImageView" destination="rd1-29-qnZ" id="aSt-uw-SaR"/>
+            </connections>
+            <point key="canvasLocation" x="141.30434782608697" y="125.55803571428571"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

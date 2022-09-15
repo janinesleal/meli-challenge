@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailsViewController: UIViewController {
     
@@ -20,12 +21,22 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        setCollectionView()
     }
     
     private func setUpUI() {
         objectTitleLabel.text = product?.body?.title
-        objectValueLabel.text = "\(product?.body?.price ?? 0)"
+        objectValueLabel.text = product?.body?.price?.toBRL()
         checkIsFav()
+    }
+    
+    private func setCollectionView() {
+        objectImgsCollectionVIew.dataSource = self
+        objectImgsCollectionVIew.register(UINib(nibName: "ObjectImgCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imgCell")
+        objectImgsCollectionVIew.showsHorizontalScrollIndicator = false
+        let layout = objectImgsCollectionVIew.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: 297, height: 184)
+        layout.scrollDirection = .horizontal
     }
     
     func checkIsFav() {
@@ -55,5 +66,25 @@ class DetailsViewController: UIViewController {
         if let encoded = try? JSONEncoder().encode(FavList.list) {
             defaults.set(encoded, forKey: "FavList")
         }
+    }
+}
+
+extension DetailsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let productPicsList = product?.body?.pictures else { return 0 }
+        return productPicsList.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+            return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ObjectImgCollectionViewCell
+        
+        if let productPicsList = product?.body?.pictures {
+            cell.productImageView.kf.setImage(with: productPicsList[indexPath.row].url?.toHttps())
+        }
+        return cell
     }
 }

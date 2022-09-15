@@ -24,15 +24,9 @@ class ProductTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCell(title: String, price: String, image: String) {
-        guard let http = URL(string: image) else { return }
-        guard var comps = URLComponents(url: http, resolvingAgainstBaseURL: false) else { return }
-        comps.scheme = "https"
-        guard let imageURL = comps.url else { return }
-        let fullPrice = "R$\(price)" // TODO: fazer extensão
-        
+    func setCell(title: String, price: Double, image: String) {
         objectTitleLabel.text = title
-        objectValueLabel.text = fullPrice
-        objectImageView.kf.setImage(with: imageURL)
+        objectValueLabel.text = price.toBRL()
+        objectImageView.kf.setImage(with: image.toHttps())
     }
 }

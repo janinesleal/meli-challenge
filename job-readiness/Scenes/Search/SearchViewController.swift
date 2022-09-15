@@ -58,7 +58,7 @@ extension SearchViewController: UITableViewDataSource {
         
         if let product = viewModel.productsList[indexPath.row].body {
             cell.setCell(title: product.title ?? "",
-                         price: "\(product.price ?? 0)",
+                         price: product.price ?? 0,
                          image: product.thumbnail ?? "")
         }
         
