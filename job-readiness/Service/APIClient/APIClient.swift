@@ -91,7 +91,6 @@ class APIClient {
                 print("Error: Did not receive data")
                 return
             }
-            print(data)
             handler(data, error)
         }
         

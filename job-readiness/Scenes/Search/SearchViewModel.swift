@@ -7,16 +7,6 @@
 
 import Foundation
 
-//protocol SearchViewModelProtocol {
-////    var certificateService: AuthService { get }
-////    var service: SearchService { get }
-//    var productsList: [ProductResponse]? { get }
-//    func fetchToken()
-//    func getCategoryId(category: String)
-//    func getProductsByID()
-//    func getProducts()
-//}
-
 protocol SearchViewModelDelegate {
     func updateTableView()
 }
@@ -30,10 +20,6 @@ class SearchViewModel {
     private var productsIDList: [String] = []
     var delegate: SearchViewModelDelegate?
     
-//    init(certificateService: AuthService, service: SearchService) {
-//        self.service = service
-//        self.certificateService = certificateService
-//    }
     
     func fetchToken() {
         certificateService.getToken { response in
@@ -66,7 +52,6 @@ class SearchViewModel {
                 for product in content {
                     guard let id = product.id else { return }
                     self.productsIDList.append(id)
-                    
                 }
                 self.getProducts()
             } else {
@@ -83,9 +68,7 @@ class SearchViewModel {
             if let products = response {
                 for product in products {
                     self.productsList.append(product)
-                    print(product.body?.title)
                 }
-                
                 self.delegate?.updateTableView()
             } else {
                 //token inválido - stautus 401

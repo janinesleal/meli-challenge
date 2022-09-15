@@ -6,6 +6,6 @@ target 'job-readiness' do
   use_frameworks!
 
   # Pods for job-readiness
-	pod 'Alamofire'
+  pod 'Kingfisher', '~> 7.0'
 
 end

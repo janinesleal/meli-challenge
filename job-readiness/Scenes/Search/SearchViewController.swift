@@ -56,9 +56,11 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = resultsTableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
         
-        let list = viewModel.productsList
-        
-        cell.setCell(title: list[indexPath.row].body?.title ?? "deu ruim", price: "\(list[indexPath.row].body?.price ?? 0)")
+        if let product = viewModel.productsList[indexPath.row].body {
+            cell.setCell(title: product.title ?? "",
+                         price: "\(product.price ?? 0)",
+                         image: product.thumbnail ?? "")
+        }
         
         return cell
     }
