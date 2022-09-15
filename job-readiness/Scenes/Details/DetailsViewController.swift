@@ -44,7 +44,7 @@ class DetailsViewController: UIViewController {
             self.product?.body?.id == productList.body?.id
         }
         
-        isFav ? favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        favButton.setImage(UIImage(systemName: isFav ? "heart.fill" : "heart"), for: .normal)
     }
     
     @IBAction func setAsFav(_ sender: Any) {

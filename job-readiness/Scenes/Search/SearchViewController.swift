@@ -67,12 +67,6 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 extension SearchViewController: SearchViewModelDelegate {
-    func updateTableView() {
-        DispatchQueue.main.async { [self] in
-            resultsTableView.reloadData()
-        }
-    }
-    
     func setViewState(state: SearchViewState) {
         DispatchQueue.main.async {
             switch state {
@@ -80,8 +74,19 @@ extension SearchViewController: SearchViewModelDelegate {
                 print("Is loading")
             case .TokenError:
                 print("Token inválido")
+                let errorAlert = ErrorAlertController()
+                errorAlert.isAuthError = true
+                errorAlert.modalPresentationStyle = .overCurrentContext
+                
+                self.navigationController?.present(errorAlert, animated: false)
             case .Error:
                 print("Categoria não encontrada")
+                let errorAlert = ErrorAlertController()
+                errorAlert.isAuthError = false
+                errorAlert.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(errorAlert, animated: false)
+            case .Success:
+                self.resultsTableView.reloadData()
             }
         }
     }

@@ -27,8 +27,7 @@
 		73688FB728D2637A0028E9E9 /* FavList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73688FB628D2637A0028E9E9 /* FavList.swift */; };
 		73C87FEB28CFC9C200001F11 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C87FE928CFC9C200001F11 /* ProductTableViewCell.swift */; };
 		73C87FEC28CFC9C200001F11 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73C87FEA28CFC9C200001F11 /* ProductTableViewCell.xib */; };
-		73C87FF228CFCAD600001F11 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C87FF128CFCAD600001F11 /* ErrorAlert.swift */; };
-		73C87FF428CFCAE700001F11 /* ErrorAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73C87FF328CFCAE700001F11 /* ErrorAlertView.xib */; };
+		73C87FF228CFCAD600001F11 /* ErrorAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C87FF128CFCAD600001F11 /* ErrorAlertController.swift */; };
 		73C87FFE28CFD17C00001F11 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C87FFD28CFD17C00001F11 /* DetailsViewController.swift */; };
 		73C8800128CFD66600001F11 /* ObjectImgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C87FFF28CFD66600001F11 /* ObjectImgCollectionViewCell.swift */; };
 		73C8800228CFD66600001F11 /* ObjectImgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73C8800028CFD66600001F11 /* ObjectImgCollectionViewCell.xib */; };
@@ -58,8 +57,7 @@
 		73688FB628D2637A0028E9E9 /* FavList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavList.swift; sourceTree = "<group>"; };
 		73C87FE928CFC9C200001F11 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		73C87FEA28CFC9C200001F11 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
-		73C87FF128CFCAD600001F11 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
-		73C87FF328CFCAE700001F11 /* ErrorAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorAlertView.xib; sourceTree = "<group>"; };
+		73C87FF128CFCAD600001F11 /* ErrorAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertController.swift; sourceTree = "<group>"; };
 		73C87FFD28CFD17C00001F11 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		73C87FFF28CFD66600001F11 /* ObjectImgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImgCollectionViewCell.swift; sourceTree = "<group>"; };
 		73C8800028CFD66600001F11 /* ObjectImgCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObjectImgCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -148,8 +146,7 @@
 		73C87FF728CFCC9B00001F11 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				73C87FF128CFCAD600001F11 /* ErrorAlert.swift */,
-				73C87FF328CFCAE700001F11 /* ErrorAlertView.xib */,
+				73C87FF128CFCAD600001F11 /* ErrorAlertController.swift */,
 				73C87FE928CFC9C200001F11 /* ProductTableViewCell.swift */,
 				73C87FEA28CFC9C200001F11 /* ProductTableViewCell.xib */,
 				73C87FFF28CFD66600001F11 /* ObjectImgCollectionViewCell.swift */,
@@ -283,7 +280,6 @@
 				7329311328CF595F000F0A99 /* LaunchScreen.storyboard in Resources */,
 				73C8800228CFD66600001F11 /* ObjectImgCollectionViewCell.xib in Resources */,
 				73C87FEC28CFC9C200001F11 /* ProductTableViewCell.xib in Resources */,
-				73C87FF428CFCAE700001F11 /* ErrorAlertView.xib in Resources */,
 				7329311028CF595F000F0A99 /* Assets.xcassets in Resources */,
 				7329310E28CF595F000F0A99 /* Main.storyboard in Resources */,
 			);
@@ -343,7 +339,7 @@
 				7329310B28CF595E000F0A99 /* SearchViewController.swift in Sources */,
 				730AEE9028D10D180033F36E /* SearchService.swift in Sources */,
 				730AEE9228D140860033F36E /* CategoryResponse.swift in Sources */,
-				73C87FF228CFCAD600001F11 /* ErrorAlert.swift in Sources */,
+				73C87FF228CFCAD600001F11 /* ErrorAlertController.swift in Sources */,
 				73C8800528CFD7DC00001F11 /* SearchViewModel.swift in Sources */,
 				73C87FEB28CFC9C200001F11 /* ProductTableViewCell.swift in Sources */,
 				73C8800128CFD66600001F11 /* ObjectImgCollectionViewCell.swift in Sources */,

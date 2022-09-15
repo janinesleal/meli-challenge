@@ -9,7 +9,6 @@ import Foundation
 
 protocol SearchViewModelDelegate {
     func setViewState(state: SearchViewState)
-    func updateTableView()
 }
 
 class SearchViewModel {
@@ -48,6 +47,7 @@ class SearchViewModel {
         guard let categoryID = categoryID else { return }
 
         service.getProductsIDs(token: authToken, categoryID: categoryID) { response in
+            self.delegate?.setViewState(state: .isLoading)
             if let content = response?.content {
                 for product in content {
                     guard let id = product.id else { return }
@@ -71,13 +71,13 @@ class SearchViewModel {
     
     func getProducts() {
         guard let authToken = authToken else { return }
-        print(self.productsIDList)
+
         service.getProducts(token: authToken, itemsIds: productsIDList) { response in
             if let products = response {
                 for product in products {
                     self.productsList.append(product)
                 }
-                self.delegate?.updateTableView()
+                self.delegate?.setViewState(state: .Success)
             } else {
                 self.delegate?.setViewState(state: .TokenError)
             }
@@ -86,5 +86,5 @@ class SearchViewModel {
 }
 
 enum SearchViewState {
-    case isLoading, TokenError, Error
+    case isLoading, TokenError, Error, Success
 }

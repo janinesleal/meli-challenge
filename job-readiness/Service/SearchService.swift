@@ -32,7 +32,7 @@ class SearchService {
         let urlExtension = "highlights/MLB/category/\(categoryID)"
         
         apiClient.get(token: token, urlExtension: urlExtension) { data, error in
-            do {
+            do {//TODO: USAR GENERICS
                 let response = try JSONDecoder().decode(ProductByCategoryResponse.self, from: data)
                 completion(response)
             } catch let error {
