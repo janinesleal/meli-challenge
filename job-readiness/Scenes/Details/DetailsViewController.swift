@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var objectTitleLabel: UILabel!
     @IBOutlet weak var objectValueLabel: UILabel!
     @IBOutlet weak var objectDescriptionLabel: UILabel!
@@ -21,7 +21,7 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
     }
-
+    
     private func setUpUI() {
         objectTitleLabel.text = product?.body?.title
         objectValueLabel.text = "\(product?.body?.price ?? 0)"
@@ -36,16 +36,24 @@ class DetailsViewController: UIViewController {
         isFav ? favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : favButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     
-
     @IBAction func setAsFav(_ sender: Any) {
-        let defaults = UserDefaults.standard
+        
         guard let product = product else { return }
         
         if FavList.list.insert(product).inserted {
-            if let encoded = try? JSONEncoder().encode(product) {
-                defaults.set(encoded, forKey: "FavList")
-            }
+            setUserDefaults()
             favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            FavList.list.remove(product)
+            setUserDefaults()
+            favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+    
+    func setUserDefaults() {
+        let defaults = UserDefaults.standard
+        if let encoded = try? JSONEncoder().encode(FavList.list) {
+            defaults.set(encoded, forKey: "FavList")
         }
     }
 }
