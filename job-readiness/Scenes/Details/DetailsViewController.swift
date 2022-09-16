@@ -32,7 +32,8 @@ class DetailsViewController: UIViewController {
     
     private func setCollectionView() {
         objectImgsCollectionVIew.dataSource = self
-        objectImgsCollectionVIew.register(UINib(nibName: "ObjectImgCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imgCell")
+        objectImgsCollectionVIew.register(ProductImageCollectionViewCell
+            .self, forCellWithReuseIdentifier: ProductImageCollectionViewCell.cellID)
         objectImgsCollectionVIew.showsHorizontalScrollIndicator = false
         let layout = objectImgsCollectionVIew.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: 297, height: 184)
@@ -80,10 +81,10 @@ extension DetailsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ObjectImgCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductImageCollectionViewCell.cellID, for: indexPath) as! ProductImageCollectionViewCell
         
         if let productPicsList = product?.body?.pictures {
-            cell.productImageView.kf.setImage(with: productPicsList[indexPath.row].url?.toHttps())
+            cell.productImage.kf.setImage(with: productPicsList[indexPath.row].url?.toHttps())
         }
         return cell
     }
