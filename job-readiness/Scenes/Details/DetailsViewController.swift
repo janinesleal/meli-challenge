@@ -44,7 +44,7 @@ class DetailsViewController: UIViewController {
             self.product?.body?.id == productList.body?.id
         }
         
-        favButton.setImage(UIImage(systemName: isFav ? "heart.fill" : "heart"), for: .normal)
+        favButton.setImage(UIImage(systemName: isFav ? Icons.heartFilled.rawValue : Icons.heart.rawValue), for: .normal)
     }
     
     @IBAction func setAsFav(_ sender: Any) {
@@ -53,11 +53,11 @@ class DetailsViewController: UIViewController {
         
         if FavList.list.insert(product).inserted {
             setUserDefaults()
-            favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favButton.setImage(UIImage(systemName: Icons.heartFilled.rawValue), for: .normal)
         } else {
             FavList.list.remove(product)
             setUserDefaults()
-            favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            favButton.setImage(UIImage(systemName: Icons.heart.rawValue), for: .normal)
         }
     }
     

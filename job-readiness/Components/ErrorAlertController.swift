@@ -35,7 +35,7 @@ class ErrorAlertController: UIViewController {
         element.translatesAutoresizingMaskIntoConstraints = false
         element.text = setTitle(type: type)
         element.textAlignment = .center
-        element.tintColor = .black
+        element.tintColor = .lightGray
         element.font = element.font.withSize(20)
         return element
     }()
@@ -44,7 +44,7 @@ class ErrorAlertController: UIViewController {
         let element = UIImageView()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.image = UIImage(systemName: setImage(type: type))
-        element.tintColor = .green
+        element.tintColor = Colors.darkBlue
         return element
     }()
     
@@ -52,7 +52,7 @@ class ErrorAlertController: UIViewController {
         let element = UIButton()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.setTitle("Logar novamente", for: .normal)
-        element.backgroundColor = .magenta
+        element.backgroundColor = Colors.darkBlue
         element.layer.cornerRadius = 16
         return element
     }()
@@ -60,7 +60,7 @@ class ErrorAlertController: UIViewController {
     private lazy var closeButton: UIButton = {
         let element = UIButton()
         element.translatesAutoresizingMaskIntoConstraints = false
-        element.setImage(UIImage(systemName: "xmark"), for: .normal)
+        element.setImage(UIImage(systemName: Icons.close.rawValue), for: .normal)
         element.tintColor = .black
         element.contentHorizontalAlignment = .right
         element.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
@@ -152,11 +152,11 @@ class ErrorAlertController: UIViewController {
     private func setImage(type: ErrorType) -> String {
         switch type {
         case .auth:
-            return "person.crop.circle.badge.xmark"
+            return Icons.noAuth.rawValue
         case .generic:
-            return "questionmark.circle"
+            return Icons.genericError.rawValue
         case .category:
-            return "xmark.circle"
+            return Icons.error.rawValue
         }
     }
     

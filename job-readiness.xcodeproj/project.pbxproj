@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0569BF7794E6025E37560D8C /* Pods_job_readiness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0668B701172A7B8C546346 /* Pods_job_readiness.framework */; };
+		7307619728D4D8B4001D1905 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307619628D4D8B4001D1905 /* Colors.swift */; };
+		7307619928D4D994001D1905 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307619828D4D994001D1905 /* Icons.swift */; };
 		730AEE8A28D0B02A0033F36E /* CertificateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AEE8928D0B02A0033F36E /* CertificateRequest.swift */; };
 		730AEE8C28D0B0850033F36E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AEE8B28D0B0850033F36E /* AuthService.swift */; };
 		730AEE8E28D0B0C90033F36E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730AEE8D28D0B0C90033F36E /* APIClient.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		5E1217664D626C7FA7B6D2AF /* Pods-job-readiness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-job-readiness.debug.xcconfig"; path = "Target Support Files/Pods-job-readiness/Pods-job-readiness.debug.xcconfig"; sourceTree = "<group>"; };
+		7307619628D4D8B4001D1905 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		7307619828D4D994001D1905 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		730AEE8928D0B02A0033F36E /* CertificateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRequest.swift; sourceTree = "<group>"; };
 		730AEE8B28D0B0850033F36E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		730AEE8D28D0B0C90033F36E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 				734CD90C28D35573008E9C1C /* Extensions */,
 				73688FB228D1F0720028E9E9 /* HttpMethods.swift */,
 				73688FB628D2637A0028E9E9 /* FavList.swift */,
+				7307619628D4D8B4001D1905 /* Colors.swift */,
+				7307619828D4D994001D1905 /* Icons.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73688FB328D1F0720028E9E9 /* HttpMethods.swift in Sources */,
+				7307619728D4D8B4001D1905 /* Colors.swift in Sources */,
 				730AEE9428D141B20033F36E /* ProductByCategoryResponse.swift in Sources */,
 				7329310B28CF595E000F0A99 /* SearchViewController.swift in Sources */,
 				730AEE9028D10D180033F36E /* SearchService.swift in Sources */,
@@ -347,6 +354,7 @@
 				734CD91028D3614C008E9C1C /* NumsExtension.swift in Sources */,
 				730AEE8C28D0B0850033F36E /* AuthService.swift in Sources */,
 				73688FB528D1FD450028E9E9 /* ProductResponse.swift in Sources */,
+				7307619928D4D994001D1905 /* Icons.swift in Sources */,
 				734CD90E28D35588008E9C1C /* StringExtensions.swift in Sources */,
 				7329310928CF595E000F0A99 /* SceneDelegate.swift in Sources */,
 				73688FB728D2637A0028E9E9 /* FavList.swift in Sources */,
