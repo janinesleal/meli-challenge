@@ -10,51 +10,36 @@ import Foundation
 class SearchService {
     let apiClient = APIClient()
     
-    func getCategoryId(category: String, completion: @escaping (CategoryResponse?) -> Void) {
+    func getCategoryId(category: String, completion: @escaping ((Result<[CategoryResponse], Error>) -> Void)) {
         let params = [
             "limit" : "1",
             "q" : category
         ]
-        
         let urlExtension = "sites/MLB/domain_discovery/search"
         
-        apiClient.get(parameters: params, urlExtension: urlExtension) { data, error in
-            do {
-                let category = try JSONDecoder().decode([CategoryResponse].self, from: data)
-                completion(category.first)
-            } catch let error {
-                print("error: \(error)")
-            }
+        apiClient.get(parameters: params, urlExtension: urlExtension) { result in
+            completion(result)
         }
     }
     
-    func getProductsIDs(token: String, categoryID: String, completion: @escaping (ProductByCategoryResponse?) -> Void) {
+    func getProductsIDs(token: String, categoryID: String, completion: @escaping ((Result<ProductByCategoryResponse, Error>) -> Void)) {
         let urlExtension = "highlights/MLB/category/\(categoryID)"
         
-        apiClient.get(token: token, urlExtension: urlExtension) { data, error in
-            do {//TODO: USAR GENERICS
-                let response = try JSONDecoder().decode(ProductByCategoryResponse.self, from: data)
-                completion(response)
-            } catch let error {
-                print("error: \(error)")
-            }
+        apiClient.get(token: token, urlExtension: urlExtension) { result in
+            completion(result)
         }
     }
     
-    func getProducts(token: String, itemsIds: [String], completion: @escaping ([ProductResponse]?) -> Void) {
-        let urlExtension = "items"
+    func getProducts(token: String, itemsIds: [String], completion: @escaping ((Result<[ProductResponse]?, Error>) -> Void)) {
         
         let params = [
             "ids" : itemsIds.joined(separator: ",")
         ]
         
-        apiClient.get(token: token, parameters: params, urlExtension: urlExtension) { data, error in
-            do {
-                let response = try JSONDecoder().decode([ProductResponse].self, from: data)
-                completion(response)
-            } catch let error {
-                print("error: \(error)")
-            }
+        let urlExtension = "items"
+        
+        apiClient.get(token: token, parameters: params, urlExtension: urlExtension) { response in
+            completion(response)
         }
     }
 }

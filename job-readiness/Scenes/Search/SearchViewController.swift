@@ -80,13 +80,14 @@ extension SearchViewController: SearchViewModelDelegate {
                 
                 self.navigationController?.present(errorAlert, animated: false)
             case .Error:
-                print("Categoria não encontrada")
-                let errorAlert = ErrorAlertController()
-                errorAlert.isAuthError = false
-                errorAlert.modalPresentationStyle = .overCurrentContext
-                self.navigationController?.present(errorAlert, animated: false)
+                print("Serviço indisponível")
             case .Success:
                 self.resultsTableView.reloadData()
+            case .CategoryError:
+                print("Categoria não encontrada")
+                let errorAlert = ErrorAlertController()
+                errorAlert.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(errorAlert, animated: false)
             }
         }
     }
