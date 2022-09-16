@@ -10,7 +10,7 @@ import UIKit
 class ErrorAlertController: UIViewController {
     var type = ErrorType.generic
     
-    //MARK: Making components
+    //MARK: Components
     
     lazy var customAlert: UIView = {
         let element = UIView()
@@ -31,12 +31,12 @@ class ErrorAlertController: UIViewController {
     }()
     
     lazy var titleLabel: UILabel = {
-        let element = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        let element = UILabel()
+        element.translatesAutoresizingMaskIntoConstraints = false
         element.text = setTitle(type: type)
-        element.center = CGPoint(x: 160, y: 285)
         element.textAlignment = .center
         element.tintColor = .black
-        element.font = element.font.withSize(30)
+        element.font = element.font.withSize(20)
         return element
     }()
     
@@ -53,6 +53,7 @@ class ErrorAlertController: UIViewController {
         element.translatesAutoresizingMaskIntoConstraints = false
         element.setTitle("Logar novamente", for: .normal)
         element.backgroundColor = .magenta
+        element.layer.cornerRadius = 16
         return element
     }()
     
@@ -63,7 +64,6 @@ class ErrorAlertController: UIViewController {
         element.tintColor = .black
         element.contentHorizontalAlignment = .right
         element.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
-        
         return element
     }()
     
@@ -95,10 +95,12 @@ class ErrorAlertController: UIViewController {
         customAlert.addSubview(imageView)
         customAlert.addSubview(titleLabel)
         
-//        if type == .auth {
-//            customAlert.addSubview(loginButton)
-//        }
+        if type == .auth {
+            customAlert.addSubview(loginButton)
+        }
     }
+    
+    //MARK: Setting constraints
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
@@ -120,14 +122,20 @@ class ErrorAlertController: UIViewController {
             imageView.topAnchor.constraint(equalTo: customAlert.topAnchor, constant: 22),
             imageView.bottomAnchor.constraint(equalTo: customAlert.topAnchor, constant: 80),
             imageView.trailingAnchor.constraint(equalTo: customAlert.trailingAnchor, constant: -108),
-            imageView.leadingAnchor.constraint(equalTo: customAlert.leadingAnchor, constant: 108),
+            imageView.leadingAnchor.constraint(equalTo: customAlert.leadingAnchor, constant: 118),
             
-            //TODO: SETAR CONSTRAINTS DO LABEL
-//            titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 100),
-//            titleLabel.bottomAnchor.constraint(equalTo: customAlert.topAnchor, constant: 100),
-//            titleLabel.trailingAnchor.constraint(equalTo: customAlert.trailingAnchor, constant: -108),
-//            titleLabel.leadingAnchor.constraint(equalTo: customAlert.leadingAnchor, constant: 108),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
+            titleLabel.centerXAnchor.constraint(equalTo: customAlert.centerXAnchor),
         ])
+        
+        if type == .auth {
+            NSLayoutConstraint.activate([
+            loginButton.topAnchor.constraint(equalTo: customAlert.bottomAnchor, constant: -80),
+            loginButton.centerXAnchor.constraint(equalTo: customAlert.centerXAnchor),
+            loginButton.heightAnchor.constraint(equalToConstant: 35),
+            loginButton.widthAnchor.constraint(equalTo: titleLabel.widthAnchor)
+            ])
+        }
     }
     
     private func setTitle(type: ErrorType) -> String {
