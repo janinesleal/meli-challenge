@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
     private func setTableView() {
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
-        resultsTableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "productCell")
+        resultsTableView.register(ProductTableViewCell.self, forCellReuseIdentifier: ProductTableViewCell.cellID)
     }
     
     @IBAction func searchCategory(_ sender: Any) {
@@ -46,6 +46,13 @@ extension SearchViewController: UITableViewDelegate {
         
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return CGFloat(110)
+    }
+    
+    
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -54,13 +61,10 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = resultsTableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
+        let cell = resultsTableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.cellID, for: indexPath) as! ProductTableViewCell
         
-        if let product = viewModel.productsList[indexPath.row].body {
-            cell.setCell(title: product.title ?? "",
-                         price: product.price ?? 0,
-                         image: product.thumbnail ?? "")
-        }
+        let currentProduct = viewModel.productsList[indexPath.row]
+        cell.product = currentProduct
         
         return cell
     }

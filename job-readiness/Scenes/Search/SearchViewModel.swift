@@ -23,8 +23,6 @@ class SearchViewModel {
     
     func fetchToken() {
         certificateService.getToken { result in
-            self.delegate?.setViewState(state: .isLoading)
-            
             switch result {
             case let .success(response):
                 if let response = response.access_token {
@@ -40,6 +38,8 @@ class SearchViewModel {
     
     func getCategoryId(category: String) {
         service.getCategoryId(category: category) { result in
+            self.delegate?.setViewState(state: .isLoading)
+            
             switch result {
             case let .success(response):
                 if let response = response.first?.category_id {
