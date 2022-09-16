@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    @IBOutlet weak var searchTextfield: UITextField!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultsTableView: UITableView!
     
     var viewModel = SearchViewModel()
@@ -29,7 +29,7 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func searchCategory(_ sender: Any) {
-        guard let category = searchTextfield.text else { return }
+        guard let category = searchBar.text else { return }
         
         viewModel.getCategoryId(category: category)
     }
