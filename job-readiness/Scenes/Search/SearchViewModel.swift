@@ -33,14 +33,13 @@ class SearchViewModel {
                     self.delegate?.setViewState(state: .TokenError)
                 }
             case .failure(_):
-                print("Serviço indisponível")
+                self.delegate?.setViewState(state: .Error)
             }
         }
     }
     
     func getCategoryId(category: String) {
         service.getCategoryId(category: category) { result in
-            
             switch result {
             case let .success(response):
                 if let response = response.first?.category_id {
@@ -48,7 +47,7 @@ class SearchViewModel {
                     self.getProductsByID()
                 }
             case .failure(_):
-                print("Serviço indisponível")
+                self.delegate?.setViewState(state: .Error)
             }
         }
     }
@@ -58,7 +57,6 @@ class SearchViewModel {
         guard let categoryID = categoryID else { return }
         
         service.getProductsIDs(token: authToken, categoryID: categoryID) { result in
-            
             switch result {
             case let .success(response):
                 if let content = response.content {
@@ -80,9 +78,8 @@ class SearchViewModel {
                     }
                 }
             case .failure(_):
-                print("Serviço indisponível")
+                self.delegate?.setViewState(state: .Error)
             }
-         
         }
     }
     
@@ -90,7 +87,6 @@ class SearchViewModel {
         guard let authToken = authToken else { return }
         
         service.getProducts(token: authToken, itemsIds: productsIDList) { result in
-            
             switch result {
             case let .success(response):
                 if let products = response {
@@ -102,7 +98,7 @@ class SearchViewModel {
                     self.delegate?.setViewState(state: .TokenError)
                 }
             case .failure(_):
-                print("Serviço indisponível")
+                self.delegate?.setViewState(state: .Error)
             }
         }
     }

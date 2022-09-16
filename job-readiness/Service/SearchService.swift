@@ -7,7 +7,13 @@
 
 import Foundation
 
-class SearchService {
+protocol SearchServiceProtocol {
+    func getCategoryId(category: String, completion: @escaping ((Result<[CategoryResponse], Error>) -> Void))
+    func getProductsIDs(token: String, categoryID: String, completion: @escaping ((Result<ProductByCategoryResponse, Error>) -> Void))
+    func getProducts(token: String, itemsIds: [String], completion: @escaping ((Result<[ProductResponse]?, Error>) -> Void))
+}
+
+class SearchService: SearchServiceProtocol {
     let apiClient = APIClient()
     
     func getCategoryId(category: String, completion: @escaping ((Result<[CategoryResponse], Error>) -> Void)) {

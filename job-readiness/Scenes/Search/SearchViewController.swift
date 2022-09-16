@@ -64,6 +64,13 @@ extension SearchViewController: UITableViewDataSource {
         
         return cell
     }
+    
+    func showErrorAlert(type: ErrorType) {
+        let errorAlert = ErrorAlertController(type: type)
+        errorAlert.modalPresentationStyle = .overCurrentContext
+        
+        self.navigationController?.present(errorAlert, animated: false)
+    }
 }
 
 extension SearchViewController: SearchViewModelDelegate {
@@ -72,22 +79,14 @@ extension SearchViewController: SearchViewModelDelegate {
             switch state {
             case .isLoading:
                 print("Is loading")
-            case .TokenError:
-                print("Token inválido")
-                let errorAlert = ErrorAlertController()
-                errorAlert.isAuthError = true
-                errorAlert.modalPresentationStyle = .overCurrentContext
-                
-                self.navigationController?.present(errorAlert, animated: false)
-            case .Error:
-                print("Serviço indisponível")
             case .Success:
                 self.resultsTableView.reloadData()
+            case .TokenError:
+                self.showErrorAlert(type: .auth)
+            case .Error:
+                self.showErrorAlert(type: .generic)
             case .CategoryError:
-                print("Categoria não encontrada")
-                let errorAlert = ErrorAlertController()
-                errorAlert.modalPresentationStyle = .overCurrentContext
-                self.navigationController?.present(errorAlert, animated: false)
+                self.showErrorAlert(type: .category)
             }
         }
     }
