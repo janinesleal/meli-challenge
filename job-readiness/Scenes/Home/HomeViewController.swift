@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    //MARK: COMPONENTS
     var viewModel = HomeViewModel()
     lazy var loadingViewController = LoadingViewController()
     var category: String?
@@ -44,6 +45,12 @@ class HomeViewController: UIViewController {
         viewModel.fetchToken()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let index = self.productsTableView.indexPathForSelectedRow{
+            self.productsTableView.deselectRow(at: index, animated: true)
+        }
+    }
+    
     private func setViews() {
         view.addSubview(searchView)
         searchBar.delegate = self
@@ -57,11 +64,11 @@ class HomeViewController: UIViewController {
     }
     
     private func setUpUI() {
-        view.backgroundColor = .purple
         self.navigationItem.titleView = searchBar
         searchBar.backgroundColor = .clear
     }
     
+    //MARK: CONSTRAINTS
     private func setConstraints() {
         NSLayoutConstraint.activate([
             searchView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -76,6 +83,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
+    //MARK: ACTIONS
     func showErrorAlert(type: ErrorType) {
         let errorAlert = ErrorAlertController(type: type)
         errorAlert.modalPresentationStyle = .overCurrentContext
@@ -98,6 +106,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+//MARK: EXTENSIONS
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         category = searchBar.text
@@ -153,10 +162,13 @@ extension HomeViewController: HomeViewModelDelegate {
                 self.removeLoadingView()
                 self.productsTableView.reloadData()
             case .TokenError:
+                self.removeLoadingView()
                 self.showErrorAlert(type: .auth)
             case .Error:
+                self.removeLoadingView()
                 self.showErrorAlert(type: .generic)
             case .CategoryError:
+                self.removeLoadingView()
                 self.showErrorAlert(type: .category)
             }
         }

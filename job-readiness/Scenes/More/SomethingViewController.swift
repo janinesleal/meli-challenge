@@ -9,22 +9,38 @@ import UIKit
 
 class SomethingViewController: UIViewController {
 
+    lazy var navView: UIView = {
+       let element = UIView()
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.backgroundColor = Colors.yellow
+        return element
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .blue
-        self.navigationController?.navigationBar.backgroundColor = Colors.yellow
+        setViews()
+        setUpUI()
+        setConstraints()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setViews() {
+        view.addSubview(navView)
     }
-    */
+    
+    private func setUpUI() {
+        view.backgroundColor = .orange
+        self.navigationController?.navigationBar.backgroundColor = Colors.yellow
+        self.navigationItem.title = ""
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            navView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navView.topAnchor.constraint(equalTo: view.topAnchor),
+            navView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+        ])
+    }
 
 }
