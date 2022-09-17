@@ -36,7 +36,7 @@ class ErrorAlertController: UIViewController {
         element.text = setTitle(type: type)
         element.textAlignment = .center
         element.tintColor = .lightGray
-        element.font = element.font.withSize(20)
+        element.font = UIFont(name: Font.medium, size: 17)
         return element
     }()
     
@@ -49,9 +49,13 @@ class ErrorAlertController: UIViewController {
     }()
     
     lazy var loginButton: UIButton = {
+        let btnTitle = NSMutableAttributedString(string: "Fazer login", attributes:[
+            NSAttributedString.Key.font: UIFont(name: Font.regular, size: 14) as Any,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            ])
         let element = UIButton()
         element.translatesAutoresizingMaskIntoConstraints = false
-        element.setTitle("Logar novamente", for: .normal)
+        element.setAttributedTitle(btnTitle, for: .normal)
         element.backgroundColor = Colors.darkBlue
         element.layer.cornerRadius = 16
         return element

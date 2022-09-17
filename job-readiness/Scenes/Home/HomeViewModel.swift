@@ -1,5 +1,5 @@
 //
-//  SearchViewModel.swift
+//  HomeViewModel.swift
 //  job-readiness
 //
 //  Created by Janine Silva Leal on 12/09/22.
@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol SearchViewModelDelegate {
-    func setViewState(state: SearchViewState)
+protocol HomeViewModelDelegate {
+    func setViewState(state: HomeViewState)
 }
 
-class SearchViewModel {
+class HomeViewModel {
     var certificateService = AuthService()
     var service = SearchService()
     var productsList: [ProductResponse] = []
     private var authToken: String? //Não sei onde salvar
     private var categoryID: String?
     private var productsIDList: [String] = []
-    var delegate: SearchViewModelDelegate?
+    var delegate: HomeViewModelDelegate?
     
     
     func fetchToken() {
@@ -53,7 +53,10 @@ class SearchViewModel {
     }
     
     func getProductsByID() {
-        guard let authToken = authToken else { return }
+        guard let authToken = authToken else {
+            self.delegate?.setViewState(state: .TokenError)
+            return
+        }
         guard let categoryID = categoryID else { return }
         
         service.getProductsIDs(token: authToken, categoryID: categoryID) { result in
@@ -104,6 +107,6 @@ class SearchViewModel {
     }
 }
 
-enum SearchViewState {
+enum HomeViewState {
     case isLoading, TokenError, CategoryError, Success, Error
 }

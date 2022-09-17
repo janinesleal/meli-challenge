@@ -14,5 +14,7 @@ enum Icons: String {
     case error = "xmark.circle"
     case genericError = "questionmark.circle"
     case close = "xmark"
-    case search = "j"
+    case home = "house"
+    case homeFilled = "house.fill"
+    case plus = "plus"
 }

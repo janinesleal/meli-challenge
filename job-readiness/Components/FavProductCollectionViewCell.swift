@@ -1,15 +1,14 @@
 //
-//  ProductTableViewCell.swift
+//  FavProductCollectionViewCell.swift
 //  job-readiness
 //
-//  Created by Janine Silva Leal on 16/09/22.
+//  Created by Janine Silva Leal on 17/09/22.
 //
 
 import UIKit
-import Kingfisher
 
-class ProductTableViewCell : UITableViewCell {
-    static let cellID = "productCell"
+class FavProductCollectionViewCell: UICollectionViewCell {
+    static let cellID = "favCell"
     
     var product : ProductResponse? {
         didSet {
@@ -19,16 +18,23 @@ class ProductTableViewCell : UITableViewCell {
         }
     }
     
+    lazy var productImage : UIImageView = {
+        let element = UIImageView()
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.contentMode = .scaleAspectFill
+        return element
+    }()
+    
     lazy var productNameLabel : UILabel = {
         let element = UILabel()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.textColor = .black
         element.font = UIFont(name: Font.medium, size: 15)
         element.numberOfLines = 0
+        element.lineBreakMode = .byTruncatingTail
         element.textAlignment = .left
         return element
     }()
-    
     
     lazy var productPriceLabel : UILabel = {
         let element = UILabel()
@@ -44,7 +50,7 @@ class ProductTableViewCell : UITableViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.spacing = 16
+        stack.spacing = 8
         stack.contentMode = .scaleToFill
         stack.alignment = .leading
         stack.distribution = .fill
@@ -54,17 +60,8 @@ class ProductTableViewCell : UITableViewCell {
         return stack
     }()
     
-    
-    lazy var productImage : UIImageView = {
-        let element = UIImageView()
-        element.translatesAutoresizingMaskIntoConstraints = false
-        element.contentMode = .scaleAspectFit
-        return element
-    }()
-    
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         setViews()
         setConstraints()
     }
@@ -76,12 +73,13 @@ class ProductTableViewCell : UITableViewCell {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor),
-            productImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            productImage.trailingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -16)
+            productImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120),
+            productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            productImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 9),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
         ])
     }
     
