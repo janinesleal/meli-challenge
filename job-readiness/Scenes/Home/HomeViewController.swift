@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var viewModel = HomeViewModel()
+    lazy var loadingViewController = LoadingViewController()
     var category: String?
     
     lazy var searchView: UIView = {
@@ -81,6 +82,20 @@ class HomeViewController: UIViewController {
         
         self.navigationController?.present(errorAlert, animated: false)
     }
+    
+    func createLoadingView() {
+        // add the spinner view controller
+        addChild(loadingViewController)
+        loadingViewController.view.frame = view.frame
+        view.addSubview(loadingViewController.view)
+        loadingViewController.didMove(toParent: self)
+    }
+    
+    func removeLoadingView() {
+        loadingViewController.willMove(toParent: nil)
+        loadingViewController.view.removeFromSuperview()
+        loadingViewController.removeFromParent()
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -133,8 +148,9 @@ extension HomeViewController: HomeViewModelDelegate {
         DispatchQueue.main.async {
             switch state {
             case .isLoading:
-                print("Is loading")
+                self.createLoadingView()
             case .Success:
+                self.removeLoadingView()
                 self.productsTableView.reloadData()
             case .TokenError:
                 self.showErrorAlert(type: .auth)

@@ -25,8 +25,8 @@ class ViewController: UITabBarController {
         
         guard let items = self.tabBar.items else { return }
         
-        let icons = ["house", "heart", "plus"]
-        let selectedIcons = ["house.fill", Icons.heartFilled.rawValue, "plus"]
+        let icons = [Icons.home.rawValue, Icons.heart.rawValue, Icons.plus.rawValue]
+        let selectedIcons = [Icons.homeFilled.rawValue, Icons.heartFilled.rawValue, Icons.plus.rawValue]
         
         for i in 0...2 {
             items[i].image = UIImage(systemName: icons[i])
