@@ -13,6 +13,7 @@ class SomethingViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .blue
+        self.navigationController?.navigationBar.backgroundColor = Colors.yellow
     }
     
 

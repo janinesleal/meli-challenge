@@ -13,6 +13,8 @@ class FavProductsViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .red
+        self.navigationController?.navigationBar.backgroundColor = Colors.yellow
+        self.navigationItem.titleView = .none
     }
     
 

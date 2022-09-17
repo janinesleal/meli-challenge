@@ -12,15 +12,16 @@ class ViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let home = HomeViewController()
-        let favPage = FavProductsViewController()
-        let morePage = SomethingViewController()
+        let homeViewController = HomeViewController()
+        let favPageViewController = FavProductsViewController()
+        let morePageViewController = SomethingViewController()
         
-        home.title = "Home"
-        favPage.title = "Favorites"
-        morePage.title = "More"
+        homeViewController.title = "Home"
+        favPageViewController.title = "Favorites"
+        morePageViewController.title = "More"
         
-        self.setViewControllers([home, favPage, morePage], animated: false)
+        let controllers = [homeViewController, favPageViewController, morePageViewController]
+        self.viewControllers = controllers
         
         guard let items = self.tabBar.items else { return }
         
@@ -34,7 +35,8 @@ class ViewController: UITabBarController {
         
         self.tabBar.backgroundColor = .white
         self.tabBar.tintColor = Colors.darkBlue
+        
+        self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)
+        }
     }
-
 }
-
