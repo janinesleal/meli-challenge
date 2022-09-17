@@ -78,7 +78,7 @@ class ProductTableViewCell : UITableViewCell {
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             productImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             productImage.trailingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -16)
