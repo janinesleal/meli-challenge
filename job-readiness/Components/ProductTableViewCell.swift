@@ -23,7 +23,7 @@ class ProductTableViewCell : UITableViewCell {
         let element = UILabel()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.textColor = .black
-        element.font = element.font.withSize(18)
+        element.font = UIFont(name: Font.medium, size: 15)
         element.numberOfLines = 0
         element.textAlignment = .left
         return element
@@ -34,7 +34,7 @@ class ProductTableViewCell : UITableViewCell {
         let element = UILabel()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.textColor = .black
-        element.font = UIFont.systemFont(ofSize: 16)
+        element.font = UIFont(name: Font.regular, size: 14)
         element.textAlignment = .left
         element.numberOfLines = 0
         return element
