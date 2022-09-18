@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  InitialViewController.swift
 //  job-readiness
 //
 //  Created by Janine Silva Leal on 16/09/22.
@@ -7,20 +7,20 @@
 
 import UIKit
 
-class ViewController: UITabBarController {
+class InitialViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let homeViewController = HomeViewController()
-        let favPageViewController = FavProductsViewController()
-        let morePageViewController = SomethingViewController()
+        let favProductsViewController = FavProductsViewController()
+        let somethingViewController = SomethingViewController()
         
-        homeViewController.title = "Home"
-        favPageViewController.title = "Favorites"
-        morePageViewController.title = "More"
+        homeViewController.title = InitialVCStrings.homeVCTitle.rawValue
+        favProductsViewController.title = InitialVCStrings.favProductsVCTitle.rawValue
+        somethingViewController.title = InitialVCStrings.somethingVCTitle.rawValue
         
-        let controllers = [homeViewController, favPageViewController, morePageViewController]
+        let controllers = [homeViewController, favProductsViewController, somethingViewController]
         self.viewControllers = controllers
         
         guard let items = self.tabBar.items else { return }

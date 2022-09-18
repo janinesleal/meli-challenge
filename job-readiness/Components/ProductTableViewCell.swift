@@ -9,8 +9,7 @@ import UIKit
 import Kingfisher
 
 class ProductTableViewCell : UITableViewCell {
-    static let cellID = "productCell"
-    
+    //MARK: COMPONENTS
     var product : ProductResponse? {
         didSet {
             productImage.kf.setImage(with: product?.body?.thumbnail?.toHttps())
@@ -62,7 +61,7 @@ class ProductTableViewCell : UITableViewCell {
         return element
     }()
     
-    
+//MARK: SETTING
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setViews()

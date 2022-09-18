@@ -8,6 +8,7 @@
 import UIKit
 
 class FavProductsViewController: UIViewController {
+//MARK: COMPONENTS
     lazy var navView: UIView = {
         let element = UIView()
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +26,7 @@ class FavProductsViewController: UIViewController {
         return element
     }()
     
+    //MARK: SETTING
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +35,7 @@ class FavProductsViewController: UIViewController {
         setConstraints()
         favProductsCollectionView.dataSource = self
         favProductsCollectionView.register(FavProductCollectionViewCell
-            .self, forCellWithReuseIdentifier: FavProductCollectionViewCell.cellID)
+            .self, forCellWithReuseIdentifier: CellIdsStrings.favProductCV.rawValue)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +54,7 @@ class FavProductsViewController: UIViewController {
         self.navigationItem.title = ""
     }
     
+    //MARK: CONSTRAINTS
     private func setConstraints() {
         NSLayoutConstraint.activate([
             navView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -67,13 +70,14 @@ class FavProductsViewController: UIViewController {
     }
 }
 
+//MARK: EXTENSIONS
 extension FavProductsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return FavList.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = favProductsCollectionView.dequeueReusableCell(withReuseIdentifier: FavProductCollectionViewCell.cellID, for: indexPath) as! FavProductCollectionViewCell
+        let cell = favProductsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdsStrings.favProductCV.rawValue, for: indexPath) as! FavProductCollectionViewCell
         let productsArr = Array(FavList.list)
         let item = productsArr[indexPath.row]
         cell.product = item

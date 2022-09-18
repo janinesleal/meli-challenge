@@ -49,7 +49,7 @@ class ErrorAlertController: UIViewController {
     }()
     
     lazy var loginButton: UIButton = {
-        let btnTitle = NSMutableAttributedString(string: "Fazer login", attributes:[
+        let btnTitle = NSMutableAttributedString(string: ErrorStrings.loginButtonText.rawValue, attributes:[
             NSAttributedString.Key.font: UIFont(name: Font.regular, size: 14) as Any,
             NSAttributedString.Key.foregroundColor: UIColor.white,
             ])
@@ -145,11 +145,11 @@ class ErrorAlertController: UIViewController {
     private func setTitle(type: ErrorType) -> String {
         switch type {
         case .auth:
-            return "Sua sessão expirou!"
+            return ErrorStrings.authErrorText.rawValue
         case .category:
-            return "Categoria inválida"
+            return ErrorStrings.categoryErrorText.rawValue
         case .generic:
-            return "Ops, algo deu errado"
+            return ErrorStrings.genericErrorText.rawValue
         }
     }
     

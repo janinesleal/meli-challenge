@@ -8,7 +8,6 @@
 import UIKit
 
 class ProductImageCollectionViewCell: UICollectionViewCell {
-    static let cellID = "imgCell"
     
     lazy var productImage : UIImageView = {
         let element = UIImageView()

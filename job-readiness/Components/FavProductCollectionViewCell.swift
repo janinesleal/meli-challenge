@@ -8,8 +8,7 @@
 import UIKit
 
 class FavProductCollectionViewCell: UICollectionViewCell {
-    static let cellID = "favCell"
-    
+    //MARK: COMPONENTS
     var product : ProductResponse? {
         didSet {
             productImage.kf.setImage(with: product?.body?.thumbnail?.toHttps())
@@ -60,6 +59,7 @@ class FavProductCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
+    //MARK: SETTING
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setViews()
@@ -71,6 +71,7 @@ class FavProductCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(stackView)
     }
     
+    //MARK: CONSTRAINTS
     private func setConstraints() {
         NSLayoutConstraint.activate([
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor),

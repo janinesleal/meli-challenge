@@ -33,7 +33,7 @@ class DetailsViewController: UIViewController {
     private func setCollectionView() {
         objectImgsCollectionVIew.dataSource = self
         objectImgsCollectionVIew.register(ProductImageCollectionViewCell
-            .self, forCellWithReuseIdentifier: ProductImageCollectionViewCell.cellID)
+            .self, forCellWithReuseIdentifier: CellIdsStrings.productImageCV.rawValue)
         objectImgsCollectionVIew.showsHorizontalScrollIndicator = false
         let layout = objectImgsCollectionVIew.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: 297, height: 184)
@@ -65,7 +65,7 @@ class DetailsViewController: UIViewController {
     func setUserDefaults() {
         let defaults = UserDefaults.standard
         if let encoded = try? JSONEncoder().encode(FavList.list) {
-            defaults.set(encoded, forKey: "FavList")
+            defaults.set(encoded, forKey: UserDefaultsKeys.favList.rawValue)
         }
     }
 }
@@ -81,7 +81,7 @@ extension DetailsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductImageCollectionViewCell.cellID, for: indexPath) as! ProductImageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdsStrings.productImageCV.rawValue, for: indexPath) as! ProductImageCollectionViewCell
         
         if let productPicsList = product?.body?.pictures {
             cell.productImage.kf.setImage(with: productPicsList[indexPath.row].url?.toHttps())

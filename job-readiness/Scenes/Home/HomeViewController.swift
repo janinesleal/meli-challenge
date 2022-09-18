@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
         
         productsTableView.delegate = self
         productsTableView.dataSource = self
-        productsTableView.register(ProductTableViewCell.self, forCellReuseIdentifier: ProductTableViewCell.cellID)
+        productsTableView.register(ProductTableViewCell.self, forCellReuseIdentifier: CellIdsStrings.productTV.rawValue)
         view.addSubview(productsTableView)
     }
     
@@ -122,9 +122,9 @@ extension HomeViewController: UISearchBarDelegate {
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = viewModel.productsList
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: StoryboardsStrings.main.rawValue, bundle: nil)
 
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailsSB") as? DetailsViewController else { return }
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardsStrings.detailsSBID.rawValue) as? DetailsViewController else { return }
 
         viewController.product = list[indexPath.row]
 
@@ -143,7 +143,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = productsTableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.cellID, for: indexPath) as! ProductTableViewCell
+        let cell = productsTableView.dequeueReusableCell(withIdentifier: CellIdsStrings.productTV.rawValue, for: indexPath) as! ProductTableViewCell
         
         let currentProduct = viewModel.productsList[indexPath.row]
         cell.product = currentProduct
