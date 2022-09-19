@@ -15,17 +15,26 @@ class HomeViewController: UIViewController {
     var category: String?
     
     lazy var searchView: UIView = {
-       let element = UIView()
+        let element = UIView()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.backgroundColor = Colors.yellow
+        return element
+    }()
+    
+    lazy var cartButton: UIBarButtonItem = {
+        let element = UIBarButtonItem()
+        element.image = UIImage(systemName: Icons.cart.rawValue)
+        element.tintColor = .darkGray
         return element
     }()
     
     lazy var searchBar: UISearchBar = {
         let element = UISearchBar()
         element.translatesAutoresizingMaskIntoConstraints = false
-        element.backgroundColor = .clear
-        element.searchBarStyle = .minimal
+        element.placeholder = "Buscar no Mercado Livre"
+        element.searchTextField.backgroundColor = .white
+        element.searchTextField.clipsToBounds = true
+        element.searchTextField.layer.cornerRadius = 16
         return element
     }()
     
@@ -35,7 +44,7 @@ class HomeViewController: UIViewController {
         element.rowHeight = UITableView.automaticDimension
         return element
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +52,7 @@ class HomeViewController: UIViewController {
         setUpUI()
         setConstraints()
         viewModel.fetchToken()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +75,8 @@ class HomeViewController: UIViewController {
     
     private func setUpUI() {
         self.navigationItem.titleView = searchBar
-        searchBar.backgroundColor = .clear
+        let rightNavBarButton = cartButton
+        self.navigationItem.rightBarButtonItem = rightNavBarButton
     }
     
     //MARK: CONSTRAINTS
@@ -104,6 +115,16 @@ class HomeViewController: UIViewController {
         loadingViewController.view.removeFromSuperview()
         loadingViewController.removeFromParent()
     }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        searchBar.endEditing(true)
+    }
 }
 
 //MARK: EXTENSIONS
@@ -123,16 +144,16 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = viewModel.productsList
         let storyboard = UIStoryboard(name: StoryboardsStrings.main.rawValue, bundle: nil)
-
+        
         guard let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardsStrings.detailsSBID.rawValue) as? DetailsViewController else { return }
-
+        
         viewController.product = list[indexPath.row]
-
+        
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
+        
         return CGFloat(110)
     }
 }

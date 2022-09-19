@@ -17,4 +17,5 @@ enum Icons: String {
     case home = "house"
     case homeFilled = "house.fill"
     case plus = "plus"
+    case cart = "cart"
 }

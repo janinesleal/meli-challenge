@@ -51,7 +51,9 @@ class FavProductsViewController: UIViewController {
     private func setUpUI() {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = Colors.yellow
-        self.navigationItem.title = ""
+        let textAttributes = [NSAttributedString.Key.font: UIFont(name: Font.regular, size: 15) as Any]
+        self.navigationItem.title = InitialVCStrings.favProductsVCTitle.rawValue
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     //MARK: CONSTRAINTS
