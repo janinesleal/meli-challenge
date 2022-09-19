@@ -56,8 +56,8 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let index = self.productsTableView.indexPathForSelectedRow{
-            self.productsTableView.deselectRow(at: index, animated: true)
+        if let index = self.productsTableView.indexPathForSelectedRow {
+            productsTableView.deselectRow(at: index, animated: true)
         }
     }
     
@@ -74,9 +74,9 @@ class HomeViewController: UIViewController {
     }
     
     private func setUpUI() {
-        self.navigationItem.titleView = searchBar
+        navigationItem.titleView = searchBar
         let rightNavBarButton = cartButton
-        self.navigationItem.rightBarButtonItem = rightNavBarButton
+        navigationItem.rightBarButtonItem = rightNavBarButton
     }
     
     //MARK: CONSTRAINTS
@@ -99,7 +99,7 @@ class HomeViewController: UIViewController {
         let errorAlert = ErrorAlertController(type: type)
         errorAlert.modalPresentationStyle = .overCurrentContext
         
-        self.navigationController?.present(errorAlert, animated: false)
+        navigationController?.present(errorAlert, animated: false)
     }
     
     func createLoadingView() {

@@ -54,7 +54,7 @@ class HomeViewModel {
     
     func getProductsByID() {
         guard let authToken = authToken else {
-            self.delegate?.setViewState(state: .TokenError)
+            delegate?.setViewState(state: .TokenError)
             return
         }
         guard let categoryID = categoryID else { return }
