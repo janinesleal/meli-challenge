@@ -12,17 +12,17 @@ protocol HomeViewModelDelegate {
 }
 
 class HomeViewModel {
-    var certificateService = AuthService()
+    var authService = AuthService()
     var service = SearchService()
     var productsList: [ProductResponse] = []
     private var authToken: String? //Não sei onde salvar
     private var categoryID: String?
     private var productsIDList: [String] = []
     var delegate: HomeViewModelDelegate?
-    
+    var category: String?
     
     func fetchToken() {
-        certificateService.getToken { result in
+        authService.getToken { result in
             switch result {
             case let .success(response):
                 if let response = response.access_token {
@@ -36,7 +36,12 @@ class HomeViewModel {
         }
     }
     
-    func getCategoryId(category: String) {
+    func getCategoryId() {
+        guard let category = category else {
+            delegate?.setViewState(state: .Error)
+            return
+        }
+
         service.getCategoryId(category: category) { result in
             self.delegate?.setViewState(state: .isLoading)
             

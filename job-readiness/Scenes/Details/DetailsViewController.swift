@@ -9,13 +9,7 @@ import UIKit
 import Kingfisher
 
 class DetailsViewController: UIViewController {
-    
-    @IBOutlet weak var objectTitleLabel: UILabel!
-    @IBOutlet weak var objectValueLabel: UILabel!
-    @IBOutlet weak var objectDescriptionLabel: UILabel!
-    @IBOutlet weak var objectImgsCollectionVIew: UICollectionView!
-    @IBOutlet weak var favButton: UIButton!
-    
+    var mainView: DetailsView { return self.view as! DetailsView }
     var product: ProductResponse?
     
     override func viewDidLoad() {
@@ -24,20 +18,25 @@ class DetailsViewController: UIViewController {
         setCollectionView()
     }
     
+    override func loadView() {
+        view = DetailsView()
+    }
+    
     private func setUpUI() {
-        objectTitleLabel.text = product?.body?.title
-        objectValueLabel.text = product?.body?.price?.toBRL()
+        view.backgroundColor = .white
+        mainView.productTitleLabel.text = product?.body?.title
+        mainView.productPriceLabel.text = product?.body?.price?.toBRL()
         checkIsFav()
+        mainView.favButton.addTarget(self, action: #selector(setAsFav), for: .touchUpInside)
+//        navigationItem.backButtonTitle = ""
     }
     
     private func setCollectionView() {
-        objectImgsCollectionVIew.dataSource = self
-        objectImgsCollectionVIew.register(ProductImageCollectionViewCell
+        mainView.imagesCollectionView.dataSource = self
+        mainView.imagesCollectionView.register(ProductImageCollectionViewCell
             .self, forCellWithReuseIdentifier: CellIdsStrings.productImageCV.rawValue)
-        objectImgsCollectionVIew.showsHorizontalScrollIndicator = false
-        let layout = objectImgsCollectionVIew.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 297, height: 184)
-        layout.scrollDirection = .horizontal
+        mainView.imagesCollectionView.showsHorizontalScrollIndicator = false
+      
     }
     
     func checkIsFav() {
@@ -45,20 +44,21 @@ class DetailsViewController: UIViewController {
             self.product?.body?.id == productList.body?.id
         }
         
-        favButton.setImage(UIImage(systemName: isFav ? Icons.heartFilled.rawValue : Icons.heart.rawValue), for: .normal)
+        mainView.favButton.setImage(UIImage(systemName: isFav ? Icons.heartFilled.rawValue : Icons.heart.rawValue), for: .normal)
     }
     
-    @IBAction func setAsFav(_ sender: Any) {
+    @objc
+    func setAsFav(_ sender: Any) {
         
         guard let product = product else { return }
         
         if FavList.list.insert(product).inserted {
             setUserDefaults()
-            favButton.setImage(UIImage(systemName: Icons.heartFilled.rawValue), for: .normal)
+            mainView.favButton.setImage(UIImage(systemName: Icons.heartFilled.rawValue), for: .normal)
         } else {
             FavList.list.remove(product)
             setUserDefaults()
-            favButton.setImage(UIImage(systemName: Icons.heart.rawValue), for: .normal)
+            mainView.favButton.setImage(UIImage(systemName: Icons.heart.rawValue), for: .normal)
         }
     }
     

@@ -104,6 +104,28 @@ class ErrorAlertController: UIViewController {
         }
     }
     
+    private func setTitle(type: ErrorType) -> String {
+        switch type {
+        case .auth:
+            return ErrorStrings.authErrorText.rawValue
+        case .category:
+            return ErrorStrings.categoryErrorText.rawValue
+        case .generic:
+            return ErrorStrings.genericErrorText.rawValue
+        }
+    }
+    
+    private func setImage(type: ErrorType) -> String {
+        switch type {
+        case .auth:
+            return Icons.noAuth.rawValue
+        case .generic:
+            return Icons.genericError.rawValue
+        case .category:
+            return Icons.error.rawValue
+        }
+    }
+    
     //MARK: Setting constraints
     
     private func setConstraints() {
@@ -139,28 +161,6 @@ class ErrorAlertController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 35),
             loginButton.widthAnchor.constraint(equalTo: titleLabel.widthAnchor)
             ])
-        }
-    }
-    
-    private func setTitle(type: ErrorType) -> String {
-        switch type {
-        case .auth:
-            return ErrorStrings.authErrorText.rawValue
-        case .category:
-            return ErrorStrings.categoryErrorText.rawValue
-        case .generic:
-            return ErrorStrings.genericErrorText.rawValue
-        }
-    }
-    
-    private func setImage(type: ErrorType) -> String {
-        switch type {
-        case .auth:
-            return Icons.noAuth.rawValue
-        case .generic:
-            return Icons.genericError.rawValue
-        case .category:
-            return Icons.error.rawValue
         }
     }
     

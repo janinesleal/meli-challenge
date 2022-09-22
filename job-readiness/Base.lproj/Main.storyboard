@@ -19,6 +19,7 @@
         <!--Details View Controller-->
         <scene sceneID="Wzm-5i-MlC">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="92F-6y-hPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DetailsSB" id="6Me-hK-bcZ" customClass="DetailsViewController" customModule="job_readiness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VCC-CX-7v4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -63,9 +64,6 @@
                                                                 <buttonConfiguration key="configuration" style="plain" title="Favoritar" titleAlignment="center">
                                                                     <fontDescription key="titleFontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                 </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="setAsFav:" destination="6Me-hK-bcZ" eventType="touchUpInside" id="ynU-S4-sk6"/>
-                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDK-wJ-mBY">
                                                                 <rect key="frame" x="171.66666666666663" y="0.0" width="171.33333333333337" height="30"/>
@@ -172,15 +170,7 @@
                             <constraint firstItem="egg-iS-rXl" firstAttribute="top" secondItem="VCC-CX-7v4" secondAttribute="top" id="t24-gh-fX8"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="favButton" destination="DUs-se-Zc2" id="p44-Dj-qdU"/>
-                        <outlet property="objectDescriptionLabel" destination="2Hq-Bw-7ob" id="J3s-RC-Rwj"/>
-                        <outlet property="objectImgsCollectionVIew" destination="bdd-dv-m55" id="cPp-xu-h4a"/>
-                        <outlet property="objectTitleLabel" destination="QhK-xZ-04t" id="Aig-HT-yk9"/>
-                        <outlet property="objectValueLabel" destination="6y2-Bt-dux" id="k4n-0W-FDy"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="92F-6y-hPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="968.79999999999995" y="89.408866995073893"/>
         </scene>

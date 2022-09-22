@@ -12,86 +12,38 @@ class HomeViewController: UIViewController {
     //MARK: COMPONENTS
     var viewModel = HomeViewModel()
     lazy var loadingViewController = LoadingViewController()
-    var category: String?
-    
-    lazy var searchView: UIView = {
-        let element = UIView()
-        element.translatesAutoresizingMaskIntoConstraints = false
-        element.backgroundColor = Colors.yellow
-        return element
-    }()
-    
-    lazy var cartButton: UIBarButtonItem = {
-        let element = UIBarButtonItem()
-        element.image = UIImage(systemName: Icons.cart.rawValue)
-        element.tintColor = .darkGray
-        return element
-    }()
-    
-    lazy var searchBar: UISearchBar = {
-        let element = UISearchBar()
-        element.translatesAutoresizingMaskIntoConstraints = false
-        element.placeholder = "Buscar no Mercado Livre"
-        element.searchTextField.backgroundColor = .white
-        element.searchTextField.clipsToBounds = true
-        element.searchTextField.layer.cornerRadius = 16
-        return element
-    }()
-    
-    lazy var productsTableView: UITableView = {
-        let element = UITableView()
-        element.translatesAutoresizingMaskIntoConstraints = false
-        element.rowHeight = UITableView.automaticDimension
-        return element
-    }()
+    var mainView: HomeView { return self.view as! HomeView }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setViews()
         setUpUI()
-        setConstraints()
+        setDelegates()
         viewModel.fetchToken()
         hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let index = self.productsTableView.indexPathForSelectedRow {
-            productsTableView.deselectRow(at: index, animated: true)
+        if let index = mainView.productsTableView.indexPathForSelectedRow {
+            mainView.productsTableView.deselectRow(at: index, animated: true)
         }
     }
     
-    private func setViews() {
-        view.addSubview(searchView)
-        searchBar.delegate = self
-        
+    override func loadView() {
+        view = HomeView()
+    }
+    
+    private func setDelegates() {
         viewModel.delegate = self
-        
-        productsTableView.delegate = self
-        productsTableView.dataSource = self
-        productsTableView.register(ProductTableViewCell.self, forCellReuseIdentifier: CellIdsStrings.productTV.rawValue)
-        view.addSubview(productsTableView)
+        mainView.searchBar.delegate = self
+        mainView.productsTableView.delegate = self
+        mainView.productsTableView.dataSource = self
     }
     
     private func setUpUI() {
-        navigationItem.titleView = searchBar
-        let rightNavBarButton = cartButton
+        navigationItem.titleView = mainView.searchBar
+        let rightNavBarButton = mainView.cartButton
         navigationItem.rightBarButtonItem = rightNavBarButton
-    }
-    
-    //MARK: CONSTRAINTS
-    private func setConstraints() {
-        NSLayoutConstraint.activate([
-            searchView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchView.topAnchor.constraint(equalTo: view.topAnchor),
-            searchView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 120),
-            
-            productsTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            productsTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            productsTableView.topAnchor.constraint(equalTo: searchView.topAnchor, constant: 120),
-            productsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        
     }
     
     //MARK: ACTIONS
@@ -103,7 +55,6 @@ class HomeViewController: UIViewController {
     }
     
     func createLoadingView() {
-        // add the spinner view controller
         addChild(loadingViewController)
         loadingViewController.view.frame = view.frame
         view.addSubview(loadingViewController.view)
@@ -123,29 +74,27 @@ class HomeViewController: UIViewController {
     }
     
     @objc func dismissKeyboard() {
-        searchBar.endEditing(true)
+        mainView.searchBar.endEditing(true)
     }
 }
 
 //MARK: EXTENSIONS
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        category = searchBar.text
+        viewModel.category = searchBar.text
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let category = searchBar.text else { return }
         searchBar.endEditing(true)
-        viewModel.getCategoryId(category: category)
+        viewModel.getCategoryId()
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = viewModel.productsList
-        let storyboard = UIStoryboard(name: StoryboardsStrings.main.rawValue, bundle: nil)
         
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardsStrings.detailsSBID.rawValue) as? DetailsViewController else { return }
+        let viewController =  DetailsViewController()
         
         viewController.product = list[indexPath.row]
         
@@ -153,7 +102,6 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return CGFloat(110)
     }
 }
@@ -164,7 +112,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = productsTableView.dequeueReusableCell(withIdentifier: CellIdsStrings.productTV.rawValue, for: indexPath) as! ProductTableViewCell
+        let cell = mainView.productsTableView.dequeueReusableCell(withIdentifier: CellIdsStrings.productTV.rawValue, for: indexPath) as! ProductTableViewCell
         
         let currentProduct = viewModel.productsList[indexPath.row]
         cell.product = currentProduct
@@ -181,7 +129,7 @@ extension HomeViewController: HomeViewModelDelegate {
                 self.createLoadingView()
             case .Success:
                 self.removeLoadingView()
-                self.productsTableView.reloadData()
+                self.mainView.productsTableView.reloadData()
             case .TokenError:
                 self.removeLoadingView()
                 self.showErrorAlert(type: .auth)
